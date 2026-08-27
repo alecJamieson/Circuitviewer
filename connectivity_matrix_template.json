@@ -1,0 +1,27 @@
+{
+  "_instructions": "TEMPLATE for Circuit Viewer's 'Load a different connectivity matrix' import. Replace the example nodes/matrix/pvalues below with your own data, keep the same structure, and upload this file. Required fields: 'nodes' and 'matrix'."
+
+  "_nodes_help": "One entry per region of interest. 'name' is the label shown in the viewer. 'x','y','z' are MNI coordinates in millimetres, used to place the node on the real cortical surface (and in the Top/Side/Posterior panels). Must have exactly N entries, matching the N x N matrix below.",
+  "nodes": [
+    { "name": "Region A", "x": -40, "y": 20,  "z": 10  },
+    { "name": "Region B", "x":  40, "y": 20,  "z": 10  },
+    { "name": "Region C", "x":   0, "y": -30, "z": 40  },
+    { "name": "Region D", "x":   0, "y": 10,  "z": -20 }
+  ],
+
+  "_matrix_help": "An N x N connection-strength matrix (N = number of nodes above). matrix[row][col] is the connection FROM the column node TO the row node - e.g. matrix[0][1] is 'Region B -> Region A'. Any signed number works: positive draws red (excitatory-style), negative draws blue (inhibitory-style); magnitude scales line width and opacity. Diagonal entries (matrix[i][i]) are a region's own self-term and are drawn as a ring around the node rather than a line - set them to 0 if your data has no meaningful self-connection.",
+  "matrix": [
+    [ -0.50,  0.30, -0.10,  0.00 ],
+    [  0.25, -0.50,  0.00, -0.15 ],
+    [ -0.05,  0.00, -0.50,  0.40 ],
+    [  0.00, -0.20,  0.35, -0.50 ]
+  ],
+
+  "_pvalues_help": "OPTIONAL. Same N x N shape as 'matrix'. Used as the evidence/confidence measure that the Evidence-threshold slider filters on (0 = no evidence, 1 = full confidence) - a connection only appears once its pvalues entry clears the slider's threshold. If omitted, every nonzero matrix entry is treated as fully confident (pvalues effectively all 1) and only the threshold slider's 'weak evidence' end has any effect. Diagonal pvalues entries gate whether that self-term ring shows, same as any other cell.",
+  "pvalues": [
+    [ 1.00, 0.98, 0.60, 0.00 ],
+    [ 0.95, 1.00, 0.00, 0.80 ],
+    [ 0.55, 0.00, 1.00, 0.97 ],
+    [ 0.00, 0.85, 0.96, 1.00 ]
+  ]
+}
